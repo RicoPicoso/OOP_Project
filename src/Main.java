@@ -7,13 +7,14 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         //Items for testing
-        inventory.addItem(new Item("Lacasitos", 2.49, 15));
-        inventory.addItem(new Item("Sandwich", 49.99, 50));
-        inventory.addItem(new Item("Bocata", 5, 3));
-        inventory.addItem(new Item("TV", 1000, 1));
+        inventory.addItem(new Item("Lacasitos", 2.49, 15, 10));
+        inventory.addItem(new Item("Sandwich", 49.99, 50, 15));
+        inventory.addItem(new Item("Bocata", 5, 3, 50));
+        inventory.addItem(new Item("TV", 1000, 1, 5));
 
         inventory.displayInventory();
 
+        //Menu
         while(true){
             System.out.println("1. Add product to cart.");
             System.out.println("2. View cart");
@@ -31,7 +32,11 @@ public class Main {
                     if (product != null) {
                         System.out.print("Enter quantity: ");
                         int quantity = sc.nextInt();
-                        cart.addToCart(product, quantity);
+                        try {
+                            cart.addToCart(product, quantity);
+                        } catch (IllegalArgumentException e){
+                            System.out.println(e.getMessage());
+                        }
                         inventory.displayInventory();
                     } else {
                         System.out.println("Product not found.");
@@ -49,6 +54,7 @@ public class Main {
                     double discount = sc.nextDouble();
                     double finalAmount = cart.applyDiscount(totalAmount, discount);
                     System.out.println("Total after discount: " + finalAmount + " €");
+                    System.out.println("\nPurchase completed.\n");
                     cart.emptyCart();
                 }
                 case 4 -> System.out.println("Exiting...");

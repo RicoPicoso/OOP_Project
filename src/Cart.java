@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Cart {
 
@@ -18,7 +18,7 @@ public class Cart {
             throw new IllegalArgumentException("Not enough stock for " + item.getName());
         }
 
-        Item cartItem = new Item(item.getName(), item.getPrice(), quantity);
+        Item cartItem = new Item(item.getName(), item.getPrice(), quantity, item.getTax());
         items.add(cartItem);
         item.setQuantity(item.getQuantity() - quantity);
         System.out.println(quantity + " " + item.getName() + " added to the cart.");
@@ -29,7 +29,9 @@ public class Cart {
         double total = 0;
 
         for (Item item : items) {
-            total += item.getPrice() * item.getQuantity();
+            double itemPrice = item.getPrice() * item.getQuantity();
+            double itemTax = itemPrice * (item.getTax() / 100);
+            total += itemPrice + itemTax;
         }
         //Using Math class method.
         return Math.round(total * 100.0) / 100.0;
