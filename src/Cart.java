@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Cart {
 
-    private List<Item> items;
+    private ArrayList<Item> items;
 
     public Cart() {
         items = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Cart {
         Item cartItem = new Item(item.getName(), item.getPrice(), quantity);
         items.add(cartItem);
         item.setQuantity(item.getQuantity() - quantity);
-        System.out.println(quantity + " " + item.getName() + "s added to the cart.");
+        System.out.println(quantity + " " + item.getName() + " added to the cart.");
 
     }
 
@@ -45,5 +45,9 @@ public class Cart {
         for (Item item : items) {
             System.out.println(item);
         }
+    }
+
+    public void emptyCart(){
+        items.clear();
     }
 }

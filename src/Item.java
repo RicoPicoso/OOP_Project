@@ -35,6 +35,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return name + " - €" + price + "(Amount: " + quantity + ")";
+        return name  + " " + price + " - €" + " (Amount: " + quantity + ")";
     }
 }
